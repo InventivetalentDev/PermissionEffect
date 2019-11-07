@@ -1,0 +1,4 @@
+name: PermissionEffect
+author: inventivetalent
+main: org.inventivetalent.permissioneffect.PermissionEffectPlugin
+version: ${project.version}
