@@ -1,6 +1,9 @@
 package org.inventivetalent.permissioneffect;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -17,6 +20,36 @@ public class PermissionEffectPlugin extends JavaPlugin implements Listener {
 	@Override
 	public void onEnable() {
 		Bukkit.getPluginManager().registerEvents(this, this);
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+		if ("permissioneffect".equals(command.getName())) {
+			if(!sender.hasPermission("permissioneffect.admin"))return false;
+
+			if (args.length == 0) {
+				sender.sendMessage("/pe refresh <player>");
+				return true;
+			}
+			if ("refresh".equalsIgnoreCase(args[0])) {
+				Player player;
+				if (args.length == 1) {
+					player = (Player)sender;
+				}else{
+					player = Bukkit.getPlayer(args[1]);
+				}
+				if (player == null || !player.isOnline()) {
+					sender.sendMessage(ChatColor.RED + "Player not found");
+					return false;
+				}
+				refreshEffects(player);
+				sender.sendMessage(ChatColor.GREEN + "Refreshed effects for " + player.getName());
+				return true;
+			}
+		}
+
+
+		return super.onCommand(sender, command, label, args);
 	}
 
 	@EventHandler

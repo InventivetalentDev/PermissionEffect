@@ -2,3 +2,15 @@ name: PermissionEffect
 author: inventivetalent
 main: org.inventivetalent.permissioneffect.PermissionEffectPlugin
 version: ${project.version}
+
+commands:
+  permissioneffect:
+    aliases: [permeffect, pe]
+    permission: permissioneffect.admin
+    usage: "/<command>"
+
+
+
+permissions:
+  permissioneffect.admin:
+    default: op
