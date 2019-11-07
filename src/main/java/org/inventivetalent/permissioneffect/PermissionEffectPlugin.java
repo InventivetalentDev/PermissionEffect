@@ -54,17 +54,26 @@ public class PermissionEffectPlugin extends JavaPlugin implements Listener {
 
 	@EventHandler
 	public void on(PlayerJoinEvent event) {
-		refreshEffects(event.getPlayer());
+		refreshEffectsDelayed(event.getPlayer());
 	}
 
 	@EventHandler
 	public void on(PlayerChangedWorldEvent event) {
-		refreshEffects(event.getPlayer());
+		refreshEffectsDelayed(event.getPlayer());
 	}
 
 	@EventHandler
 	public void on(PlayerRespawnEvent event) {
-		refreshEffects(event.getPlayer());
+		refreshEffectsDelayed(event.getPlayer());
+	}
+
+	void refreshEffectsDelayed(Player player) {
+		Bukkit.getScheduler().runTaskLater(this, new Runnable() {
+			@Override
+			public void run() {
+				refreshEffects(player);
+			}
+		}, 20);
 	}
 
 	void refreshEffects(Player player) {
