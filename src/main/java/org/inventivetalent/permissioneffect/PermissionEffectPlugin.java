@@ -42,7 +42,7 @@ public class PermissionEffectPlugin extends JavaPlugin implements Listener {
 					String[] split = permission.split("\\.");
 					int amplifier = 0;
 					if (split.length >= 2) {// permissioneffect.abc_def
-						PotionEffectType type = PotionEffectType.getByName(split[1]);
+						PotionEffectType type = PotionEffectType.getByName(split[1].toUpperCase());
 						if (type != null) {
 							if (split.length >= 3) {// permissioneffect.xyz.4
 								try {
